@@ -1,6 +1,6 @@
 package app.token.validator
 
-import app.config.AppConfig.AuthConfig
+import app.config.AppConfig.SecurityConfig
 import app.service.BlacklistService
 import app.token.Token.{AccessToken, IdToken, LogoutToken}
 import cats.effect.Sync
@@ -21,7 +21,7 @@ class TokenValidator[F[_] : Sync](
 }
 
 object TokenValidator {
-  def create[F[_] : Sync](config: AuthConfig, blacklist: BlacklistService[F]): F[TokenValidator[F]] =
+  def create[F[_] : Sync](config: SecurityConfig, blacklist: BlacklistService[F]): F[TokenValidator[F]] =
     for {
       itValidator <- IdTokenValidator.create(config)
       atValidator <- AccessTokenValidator.create(config, blacklist)
