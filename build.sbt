@@ -1,4 +1,5 @@
-import Dependencies._
+import CompilerPlugin._
+import Dependency._
 
 name := "security"
 
@@ -20,13 +21,14 @@ libraryDependencies ++= Seq(
   doobieCore,
   doobiePostgres,
   doobieHikari,
-  mouse
+  mouse,
+  monixCatnap
 )
 
-addCompilerPlugin(CompilerPlugins.paradise)
-addCompilerPlugin(CompilerPlugins.betterMonadicFor)
-addCompilerPlugin(CompilerPlugins.kindProjector)
-addCompilerPlugin(CompilerPlugins.scalazDeriving)
+addCompilerPlugin(paradise)
+addCompilerPlugin(betterMonadicFor)
+addCompilerPlugin(kindProjector)
+addCompilerPlugin(scalazDeriving)
 
 scalacOptions ++= List(
   "-deprecation",

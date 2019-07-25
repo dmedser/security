@@ -1,6 +1,7 @@
 import sbt._
 
-object Dependencies {
+object Dependency {
+
   object Version {
     val akkaActor = "2.5.23"
     val nimbusJwt = "7.1"
@@ -13,6 +14,7 @@ object Dependencies {
     val deriving = "1.0.0"
     val doobie = "0.7.0-M5"
     val mouse = "0.21"
+    val monix = "3.0.0-RC2"
   }
 
   val akkaActor = "com.typesafe.akka"                %% "akka-actor"             % Version.akkaActor
@@ -29,4 +31,5 @@ object Dependencies {
   val doobiePostgres = "org.tpolecat"                %% "doobie-postgres"        % Version.doobie
   val doobieHikari = "org.tpolecat"                  %% "doobie-hikari"          % Version.doobie
   val mouse = "org.typelevel"                        %% "mouse"                  % Version.mouse
+  val monixCatnap = "io.monix"                       %% "monix-catnap"           % Version.monix
 }

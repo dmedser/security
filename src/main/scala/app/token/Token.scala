@@ -11,12 +11,13 @@ sealed trait Token {
 }
 
 object Token {
-  case class AccessToken(unwrap: SignedJWT) extends Token
-  case class LogoutToken(unwrap: SignedJWT) extends Token
-  case class IdToken(unwrap: SignedJWT)     extends Token
+
+  final case class AccessToken(unwrap: SignedJWT) extends Token
+  final case class LogoutToken(unwrap: SignedJWT) extends Token
+  final case class IdToken(unwrap: SignedJWT)     extends Token
 
   def parse[F[_] : Sync, T <: Token](source: String)(f: SignedJWT => T): F[T] =
-    Sync[F].catchNonFatal(f(SignedJWT.parse(source)))
+    Sync[F].delay(f(SignedJWT.parse(source)))
 
   private def suitableClientId(token: Token): String => Boolean =
     clientId => token.unwrap.getJWTClaimsSet.getAudience.asScala.toList.contains(clientId)

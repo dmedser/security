@@ -8,7 +8,7 @@ import pureconfig.generic.ProductHint
 import pureconfig.module.catseffect.loadConfigF
 import pureconfig.{CamelCase, ConfigFieldMapping}
 
-case class AppConfig(security: SecurityConfig)
+final case class AppConfig(security: SecurityConfig)
 
 object AppConfig {
 
@@ -18,10 +18,9 @@ object AppConfig {
     loadConfigF[F, AppConfig]("app")
   }
 
-  case class SecurityConfig(jwk: JWK, jwt: JWT)
+  final case class SecurityConfig(jwk: JWK, jwt: JWT)
   object SecurityConfig {
-    case class JWK(url: String, connectionTimeout: Int, readTimeout: Int, maxSize: Int)
-    case class JWT(issuer: String, audience: List[String])
+    final case class JWK(url: String, connectionTimeout: Int, readTimeout: Int, maxSize: Int)
+    final case class JWT(issuer: String, audience: List[String])
   }
-
 }

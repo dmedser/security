@@ -9,14 +9,15 @@ import io.circe.{Decoder, Encoder}
 import io.estatico.newtype.macros.newtype
 import scalaz.deriving
 
-package object model {
-
+package object newtypes {
   @newtype
   @deriving(Decoder, Encoder, Meta)
-  case class AccessTokenId(unwrap: UUID)
+  final case class AccessTokenId(unwrap: UUID)
   object AccessTokenId {
+
     def parse(uuid: String): Either[Throwable, AccessTokenId] =
       Either.catchNonFatal(AccessTokenId(UUID.fromString(uuid)))
-  }
 
+    def randomAccessTokenId(): AccessTokenId = AccessTokenId(UUID.randomUUID())
+  }
 }
